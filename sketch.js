@@ -124,7 +124,9 @@ function collide(body,sprite)
   if(body!=null)
         {
          var d = dist(body.position.x,body.position.y,sprite.position.x,sprite.position.y);
-          if(d<=80)
+         //Prgrame que:
+         //Se a 'd' for menor ou igual a 80
+          //???
             {
               //Coloque o código que remove a fruta do mundo
               ???(engine.world,fruit);
