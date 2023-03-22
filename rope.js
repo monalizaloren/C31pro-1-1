@@ -4,12 +4,24 @@ class Rope
     {
       this.nlink = nlink
   const group = Body.nextGroup(true);
-  const rects = Composites.stack(100, 100, this.nlink, 1, 5, 5, function(x, y) {
+  /*  uma pilha de corpos retangulares é criada usando o método Composites.stack() do Matter.js.
+   A pilha é criada com this.nlink retângulos*/
+   /* 1: número de colunas de corpos na pilha
+   5: número de linhas de corpos na pilha
+   5: espaçamento horizontal entre os corpos retangulares na pilha*/
+
+  const rects = ????(100, 100, this.nlink, ?, ?, ?, function(x, y) {
       return Bodies.rectangle(x, y, 30, 5, { collisionFilter: { group: group } });
   });
       
   this.pointA = pointA;
-  this.body = Composites.chain(rects, 0.1, 0, -0.6, 0, {stiffness: 0.1, length: 0.1, render: {type: 'line'}});
+  /* rects: o array de corpos retangulares que será utilizado para criar a cadeia de corpos.
+0.1: a distância entre os corpos retangulares na cadeia.
+0: a inclinação inicial da cadeia.
+-0.6: a força de torque aplicada nos corpos retangulares para mantê-los alinhados.
+0: o deslocamento inicial da cadeia.
+{ stiffness: 0.1, length: 0.1, render: {type: 'line'} }: um objeto de opções usado para personalizar a física da cadeia e sua renderização no canvas.*/
+  this.body = Composites.chain(rects, ?, ?, ?, ?, {stiffness: 0.1, length: 0.1, render: {type: 'line'}});
       
   World.add(engine.world, this.body);
   
@@ -25,7 +37,7 @@ class Rope
     }
     
     break()
-    { //Matter.Composite.clear(this.rope,true);
+    { 
       this.body = null;
     }
     
