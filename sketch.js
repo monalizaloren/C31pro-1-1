@@ -6,9 +6,12 @@ const Constraint = Matter.Constraint;
 const Body = Matter.Body;
 const Composites = Matter.Composites;
 const Composite = Matter.Composite;
-/*const Composites = Matter.Composites;: O Composites é um módulo que contém funções para criar conjuntos complexos de corpos rígidos, como pilhas, paredes, etc.
+/*const Composites = Matter.Composites;: O Composites é um módulo que contém funções
+ para criar conjuntos complexos de corpos rígidos, como pilhas, paredes, etc.
 
-const Composite = Matter.Composite;: O Composite é um módulo que contém funções para manipular grupos de corpos rígidos, como adicionar, remover ou mover corpos entre diferentes grupos. */
+const Composite = Matter.Composite;: O Composite é um módulo que contém funções para
+ manipular grupos de corpos rígidos, como adicionar, remover ou mover corpos entre
+  diferentes grupos. */
 let engine;
 let world;
 var rope,fruit,ground;
@@ -27,16 +30,17 @@ function preload()
 {
   bg_img = loadImage('background.png');
   food = loadImage('melon.png');
-  rabbit = loadImage('Rabbit-01.png');;
+  rabbit = loadImage('Rabbit-01.png');
+  /*Carregue a animação para eat e sad*/
   blink = loadAnimation("blink_1.png","blink_2.png","blink_3.png");
-  eat = loadAnimation("eat_0.png" , "eat_1.png","eat_2.png","eat_3.png","eat_4.png");
-  sad = loadAnimation("sad_1.png","sad_2.png","sad_3.png");
-  
+/*Carregue a animação para eat e sad*/
+
   blink.playing = true;
   eat.playing = true;
   sad.playing = true;
   sad.looping= false;
-  eat.looping = false; 
+  /* Defina que a animação do eat, não ficará em loop */
+  
 }
 
 function setup() {
@@ -53,20 +57,23 @@ function setup() {
   
   rope = new Rope(7,{x:245,y:30});
   ground = new Ground(200,690,600,20);
-/* Essas linhas de código definem a taxa de quadros (frame rate) para a reprodução das animações.*/
-/*estamos reduzindo a taxa de quadros dessas animações para 1/20 segundos, o que significa que cada frame é exibido durante 0.05 segundos. Isso pode ser útil para diminuir a velocidade da animação ou para torná-la mais suave.*/
+/* Essas linhas de código definem a taxa de quadros (frame rate)
+ para a reprodução daanimações.*/
+/*estamos reduzindo a taxa de quadros dessas animações para 1/20 segundos, o que 
+significa que cada frame é exibido durante 0.05 segundos. Isso pode ser útil para 
+diminuir a velocidade da animação ou para torná-la mais suave.*/
 
   blink.frameDelay = 20;
-  eat.frameDelay = 20;
-  sad.frameDelay = 20;
+  //Defina o frameDelay de 20 para a animação eat e sad
+  
 
   bunny = createSprite(230,620,100,100);
   bunny.scale = 0.2;
 
   bunny.addAnimation('blinking',blink);
-
-  bunny.addAnimation('eating',eat);
-  bunny.addAnimation('crying',sad);
+//Adicione a animação 'eating', eat
+//Adicione a animação 'crying',sad
+  
   bunny.changeAnimation('blinking');
   
   fruit = Bodies.circle(300,300,20);
@@ -93,15 +100,14 @@ function draw()
   Engine.update(engine);
   ground.show();
 
-  if(collide(fruit,bunny)==true)
-  {
-    bunny.changeAnimation('eating');
-  }
-   
   if(collide(fruit,ground.body)==true )
   {
      bunny.changeAnimation('crying');
    }
+
+   /*Programe que:
+   Se a fruta colidindo no coelho, for verdadeiro, mude a animação
+   para 'eating'*/
 
    drawSprites();
 }
@@ -120,12 +126,13 @@ function collide(body,sprite)
          var d = dist(body.position.x,body.position.y,sprite.position.x,sprite.position.y);
           if(d<=80)
             {
-              World.remove(engine.world,fruit);
+              //Coloque o código que remove a fruta do mundo
+              ???(engine.world,fruit);
                fruit = null;
                return true; 
             }
             else{
-              return false;
+              //Retorne falso
             }
          }
 }
